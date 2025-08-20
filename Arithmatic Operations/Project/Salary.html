@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Calculater</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-6">
+            <caption>Salary Calculate</caption>
+            <table >
+                <tr>
+                    <td>Name </td>
+                    <td><input type="text" id="name" colspan="4"></td>
+                    <td>Age</td>
+                    <td><input type="number" id="age"></td>
+                </tr>
+                <tr>
+                    <td>Job Type </td>
+                    <td><input type="text" id="job"></td>
+                    <td>Job Years </td>
+                    <td><input type="number" id="year"></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                
+                <tr>
+                    <td>Hours per Day</td>
+                    <td><input type="number" id="hrs"></td>
+                    <td>Months</td>
+                    <td><input type="number" id="week"></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td>Net Salary</td>
+                    <td><input type="number" id="salary"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align:center;">
+                        <input type="submit" value="Create Salary Overview" onclick="return salaryCalc()">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-6">
+            <caption>Salary Overview</caption>
+            <table >
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" id="salaryName"></td>
+                    <td>Age</td>
+                    <td><input type="number" id="salaryAge"></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td colspan="4"><p style="text-align: center;">"On your job as,"+job+"<br> this is
+                    your salary overview :"</p></td>
+                </tr>
+                <tr>
+                    <td>Daily</td>
+                    <td><input type="number" id="daily"></td>
+                </tr>
+                <tr>
+                    <td>Monthly</td>
+                    <td><input type="number" id="monthly"></td>
+                </tr>
+                <tr>
+                    <td>Yearly</td>
+                    <td><input type="number" id="yearly"></td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <p style="text-align: center;">For <span><input type="number" id="year"></span> years working, your total salary is:</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span id="year" style="text-align: center;"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+<script>
+    function salaryCalc(){
+        var name = document.getElementById('name').value
+        var type = document.getElementById('job').value
+        var age = Number (document.getElementById('age').value)
+        var year = Number (document.getElementById('year').value)
+        var day = Number (document.getElementById('hrs').value)
+        var month = Number (document.getElementById('month').value)
+        var salary = Number (document.getElementById('salary').value)
+
+        document.getElementById('salaryName').value = name
+        document.getElementById('salaryAge').value = age
+        document.getElementById('job').value = type
+        document.getElementById('year').value = year
+
+        var year =365* year* 500
+        document.getElementById('yearly').value = year
+
+        var month = month * 500
+    }
+</script>
+
+</html>

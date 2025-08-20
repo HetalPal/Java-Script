@@ -1,0 +1,15 @@
+l = <input type="number" id="l"><br><br>
+b = <input type="number" id="b"><br>
+<input type="button" value="Add" onclick="return area()"><br><br>
+
+<h3 id = "result"></h3>
+
+<script>
+    function area(){
+        var l = Number(document.getElementById('l').value)
+        var b = Number(document.getElementById('b').value)
+
+        var ans = l*b;
+        document.getElementById('result').innerHTML = "L * B = " + ans;
+    }
+</script>

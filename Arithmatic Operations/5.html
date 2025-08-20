@@ -1,0 +1,14 @@
+dollar = <input type="number" id="d"><br><br>
+
+<input type="button" value="Add" onclick="return dollar()"><br><br>
+
+<h3 id = "result"></h3>
+
+<script>
+    function dollar(){
+        var dollar = Number(document.getElementById('d').value)
+
+        var r = dollar*88;
+        document.getElementById('result').innerHTML = "Rupees= " + dollar;
+    }
+</script>

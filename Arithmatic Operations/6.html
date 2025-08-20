@@ -1,0 +1,15 @@
+m = <input type="number" id="m"><br><br>
+
+<input type="button" value="Add" onclick="return k()"><br><br>
+
+<h3 id = "result"></h3>
+
+<script>
+    function k(){
+        var m = Number(document.getElementById('m').value)
+
+        var ans = m/1000;
+        document.getElementById('result').innerHTML = "kilometer = " + ans;
+    }
+</script>
+
