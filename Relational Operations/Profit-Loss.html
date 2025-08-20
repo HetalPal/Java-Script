@@ -1,0 +1,19 @@
+Product Price = <input type="number" id="product"><br><br>
+Selling Price = <input type="number" id="sell"><br><br>
+<input type="submit" value="Find" onclick="return profitLoss()"><br><br>
+<h2 id="result"></h2>
+
+<script>
+    function profitLoss(){
+        var product = Number(document.getElementById('product').value)
+        var sell = Number(document.getElementById('sell').value)
+
+        if(product>sell){
+            var loss = sell - product
+            document.getElementById('result').innerHTML = "Loss : "+loss
+        }else{
+            var profit = product - sell
+            document.getElementById('result').innerHTML = "Profit : "+profit
+        }
+    }
+</script>

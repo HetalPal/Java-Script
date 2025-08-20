@@ -1,0 +1,15 @@
+Enter Number = <input type="number" id="n"><br><br>
+<input type="submit" value="Find" onclick="return evenOdd()">
+<h2 id="result"></h2>
+
+<script>
+    function evenOdd(){
+        var number = Number(document.getElementById('n').value)
+
+        if(number%2==0){
+            document.getElementById('result').innerHTML = "The Number is Even..."
+        }else{
+            document.getElementById('result').innerHTML = "The Number is Odd..."
+        }
+    }
+</script>

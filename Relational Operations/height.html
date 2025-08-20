@@ -1,0 +1,15 @@
+Enter Your Height = <input type="number" id="h"><br><br>
+<input type="submit" value="Find" onclick="return evenOdd()">
+<h2 id="result"></h2>
+
+<script>
+    function evenOdd(){
+        var Height = Number(document.getElementById('h').value)
+
+        if(150 < Height){
+            document.getElementById('result').innerHTML = "You are Tall!!!"
+        }else{
+            document.getElementById('result').innerHTML = "You are Short!!!"
+        }
+    }
+</script>

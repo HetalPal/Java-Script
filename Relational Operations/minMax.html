@@ -1,0 +1,17 @@
+Enter A=<input type="number" id="a"><br><br>
+Enter B=<input type="number" id="b"><br><br>
+<input type="submit" value="Find" onclick="return minMax()"><br><br>
+<h2 id="result"></h2>
+
+<script>
+    function minMax(){
+        var A = Number(document.getElementById('a').value)
+        var B = Number(document.getElementById('b').value)
+
+        if(A > B){
+            document.getElementById('result').innerHTML = "A is Maximum"
+        }else{
+            document.getElementById('result').innerHTML = "B is Maximum"
+        }
+    }
+</script>

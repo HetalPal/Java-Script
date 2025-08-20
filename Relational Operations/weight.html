@@ -1,0 +1,15 @@
+Enter Your Weight = <input type="number" id="w"><br><br>
+<input type="submit" value="Find" onclick="return evenOdd()">
+<h2 id="result"></h2>
+
+<script>
+    function evenOdd(){
+        var Weight = Number(document.getElementById('w').value)
+
+        if(Weight>40){
+            document.getElementById('result').innerHTML = "You are Healthy!!!"
+        }else{
+            document.getElementById('result').innerHTML = "You are Unhealthy!!!"
+        }
+    }
+</script>
