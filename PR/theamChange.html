@@ -1,0 +1,35 @@
+<div id="box" style="background-color: brown; height: 100px; width: 100px;">
+    <p id="colorName"></p>
+</div>
+
+<div id="ClickedTimes"></div><br>
+<button onclick="return changeColor()">Click</button>
+<button onclick="return theamChange()">Change Theme</button>
+
+<script>
+    var divDom = document.getElementById('box');
+    var color = ['red','blue','cyan',];
+    var i=0;
+    var count = 0;
+    var j=0;
+
+    function theamChange(){
+        var bodyData = document.getElementsByTagName('body');
+
+        if(j%2==0){
+            bodyData[0].style.backgroundColor = 'black';
+            bodyData[0].style.color = 'white';
+        }else{
+            bodyData[0].style.backgroundColor = 'white';
+            bodyData[0].style.color = 'black';
+        }   
+        j++;
+    }
+
+    function changeColor(){
+        divDom.style.backgroundColor = color[i];
+        document.getElementById('colorName').innerHTML = color[i];
+        document.getElementById('ClickedTimes').innerHTML = ++count;
+        i++;
+    }
+</script>

@@ -1,0 +1,104 @@
+<style>
+    section {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: auto;
+}
+
+.image {
+  width: 400px;
+  height: 400px;
+  animation: slide 0.5s linear;
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+#leftArrow {
+  all: unset;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0.5rem;
+  color: #05d9e8;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+#rightArrow {
+  all: unset;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  padding: 0.5rem;
+  color: #05d9e8;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+#leftArrow:hover,
+#rightArrow:hover {
+  background: rgb(0, 0, 0, 0.2);
+}
+</style>
+
+<section>
+    <article id="article-container"></article>
+    <div>
+        <button id="left-arrow" onclick="return prvImg()"><</button>
+        <button id="right-arrow" onclick="return nxtImg()">></button>
+    </div>
+</section>
+
+<script>
+    var imgurlIdx = [
+        "./img/1.jpg",
+        "./img/2.jpg",
+        "./img/3.jpg"
+    ];
+
+    var articleContainer = document.getElementById('article-container')
+
+    articleContainer.innerHTML = `<img src="${imgurlIdx[0]}" class="image" />`
+
+    var index = 0
+
+    function prvImg(){
+         if (index > 0 && index < imgurlIdx.length) {
+            index--
+         }else{
+            index = imgurlIdx.length - 1
+         }
+
+         articleContainer.innerHTML = `<img src="${imgurlIdx[index]}" class="image" />`
+    }
+
+    function nxtImg(){
+        if(index >= 0 && index < imgurlIdx.length - 1){
+            index++
+        }else{
+            index = 0
+        }
+        articleContainer.innerHTML = `<img src="${imgurlIdx[index]}" class="image" />`
+    }
+</script>

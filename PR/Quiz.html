@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+</head>
+
+<style>
+    body {
+        font-family: sans-serif;
+        background: linear-gradient(135deg, #4b79a1, #283e51);
+        padding: 40px 10px;
+        color: #fff;
+    }
+
+    #quiz {
+        max-width: 700px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(6px);
+        padding: 25px 30px;
+        border-radius: 15px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .question {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+
+    .answers {
+        margin-bottom: 25px;
+    }
+
+    .answers label {
+        display: block;
+        font-size: 18px;
+        padding: 12px 15px;
+        margin: 10px 0;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .answers input {
+        margin-right: 10px;
+    }
+
+    .answers label:hover {
+        background: rgba(255, 255, 255, 0.35);
+        transform: translateX(5px);
+    }
+
+    #submit {
+        width: 100%;
+        max-width: 700px;
+        display: block;
+        margin: 25px auto;
+        font-size: 22px;
+        padding: 18px 0;
+        background: #00c6ff;
+        color: #000;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 700;
+        letter-spacing: .5px;
+        text-transform: uppercase;
+        transition: 0.3s ease;
+    }
+
+    #submit:hover {
+        background: #0099cc;
+        transform: scale(1.03);
+    }
+
+    #results {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 900;
+        background: rgba(255, 255, 255, 0.25);
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 15px;
+    }
+    #time{
+        text-align:center;
+        font-size:24px;
+        font-weight:800;
+        margin-bottom:20px;
+    }
+</style>
+
+<body>
+    <div id="time"></div>
+    <div id="quiz"></div>
+    <button id="submit">Get Results</button>
+    <div id="results"></div>
+</body>
+
+<script>
+    var myQuestions = [
+        {
+            question: "What is 10/2?",
+            answers: {
+                a: '3',
+                b: '5',
+                c: '115'
+            },
+            correctAnswer: 'b'
+        },
+        {
+            question: "What is 30/3?",
+            answers: {
+                a: '3',
+                b: '5',
+                c: '10'
+            },
+            correctAnswer: 'c'
+        }
+    ];
+
+    var quizContainer = document.getElementById('quiz');
+    var resultsContainer = document.getElementById('results');
+    var submitButton = document.getElementById('submit');
+
+    generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+    function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+
+        function showQuestions(questions, quizContainer) {
+            // we'll need a place to store the output and the answer choices
+            var output = [];
+            var answers;
+
+            // for each question...
+            for (var i = 0; i < questions.length; i++) {
+
+                // first reset the list of answers
+                answers = [];
+
+                // for each available answer...
+                for (letter in questions[i].answers) {
+
+                    // ...add an html radio button
+                    answers.push(
+                        '<label>'
+                        + '<input type="radio" name="question' + i + '" value="' + letter + '">'
+                        + letter + ': '
+                        + questions[i].answers[letter]
+                        + '</label>'
+                    );
+                }
+
+                // add this question and its answers to the output
+                output.push(
+                    '<div class="question">' + questions[i].question + '</div>'
+                    + '<div class="answers">' + answers.join('') + '</div>'
+                );
+            }
+
+            // finally combine our output list into one string of html and put it on the page
+            quizContainer.innerHTML = output.join('');
+        }
+
+
+        function showResults(questions, quizContainer, resultsContainer) {
+
+            // gather answer containers from our quiz
+            var answerContainers = quizContainer.querySelectorAll('.answers');
+
+            // keep track of user's answers
+            var userAnswer = '';
+            var numCorrect = 0;
+
+            // for each question...
+            for (var i = 0; i < questions.length; i++) {
+
+                // find selected answer
+                userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+
+                // if answer is correct
+                if (userAnswer === questions[i].correctAnswer) {
+                    numCorrect++;
+                    answerContainers[i].style.color = 'lightgreen';
+                }
+                else {
+                    answerContainers[i].style.color = 'red';
+                }
+            }
+            // show number of correct answers out of total
+            resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+        }
+
+        // show questions right away
+        showQuestions(questions, quizContainer);
+
+        // on submit, show results
+        submitButton.onclick = function () {
+            showResults(questions, quizContainer, resultsContainer);
+        }
+
+        var timeLeft = 30;
+        var time = document.getElementById("time");
+        
+        // START TIMER
+        var countdown = setInterval(function () {
+            time.innerHTML = "⏳ Time Left: " + timeLeft + " seconds";
+            timeLeft--;
+
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                showResults(myQuestions, quizContainer, resultsContainer);
+                submitButton.disabled = true;
+                timerElement.innerHTML = "⏰ Time is over!";
+            }
+        }, 1000);
+
+        // AUTO SUBMIT after time ends
+        setTimeout(function () {
+            showResults(myQuestions, quizContainer, resultsContainer);
+            submitButton.disabled = true;
+        }, 30000);
+    }
+</script>
+
+</html>

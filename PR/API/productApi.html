@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Products</title>
+<style>
+    *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+header{
+  background:#222;
+  color:#fff;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header a{
+  color:#fff;
+  text-decoration:none;
+  margin-left:15px;
+  font-weight:bold;
+}
+
+.container{
+  padding:20px;
+}
+
+/* PRODUCT LIST */
+.products{
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+}
+
+.card{
+  width:250px;
+  background:peachpuff;
+  padding:10px;
+  cursor:pointer;
+}
+
+.card img{
+  width:100%;
+  height:200px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>My Store</h2>
+  <nav>
+    <a href="index.html">Products</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<div class="container">
+  <div class="products" id="productData"></div>
+</div>
+
+<script>
+fetch('https://fakestoreapi.com/products')
+.then(res => res.json())
+.then(data => {
+  let html="";
+  data.forEach(v=>{
+    html+=`
+      <div class="card" onclick="viewProduct(${v.id})">
+        <img src="${v.image}">
+        <h4>${v.title.substring(0,40)}...</h4>
+        <p>₹ ${v.price}</p>
+      </div>`;
+  });
+  productData.innerHTML=html;
+});
+
+function viewProduct(id){
+  localStorage.setItem("productId",id);
+  location.href="singleProduct.html";
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Single Product</title>
+<style>
+    /* ===== SINGLE PRODUCT PAGE ===== */
+
+.single{
+  max-width: 900px;
+  margin: auto;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+/* Product Image */
+.single img{
+  width: 300px;
+  height: 300px;
+  object-fit: contain;
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Product Details */
+.single .details{
+  flex: 1;
+}
+
+.single h3{
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+.single p{
+  font-size: 18px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Quantity Dropdown */
+.single select{
+  padding: 8px 12px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Add To Cart Button */
+.single button{
+  background: #ff6f00;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.single button:hover{
+  background: #e65c00;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>My Store</h2>
+  <nav>
+    <a href="index.html">Products</a>
+    <a href="cart.html">Cart (<span id="count">0</span>)</a>
+  </nav>
+</header>
+
+<div class="container single">
+  <img id="image"><br><br>
+  <h3 id="title"></h3>
+  <p id="price"></p>
+
+  <select id="qty">
+    <option>1</option><option>2</option><option>3</option>
+    <option>4</option><option>5</option>
+  </select><br><br>
+
+  <button onclick="addToCart()">Add To Cart</button>
+</div>
+
+<script>
+let id = localStorage.getItem("productId");
+let product;
+
+fetch(`https://fakestoreapi.com/products/${id}`)
+.then(res=>res.json())
+.then(data=>{
+  product=data;
+  image.src=data.image;
+  title.innerText=data.title;
+  price.innerText="₹ "+data.price;
+});
+
+function addToCart(){
+  let cart = JSON.parse(localStorage.getItem("cartData")) || [];
+  product.qty = Number(qty.value);
+  cart.push(product);
+  localStorage.setItem("cartData",JSON.stringify(cart));
+  cartCount();
+  alert("Added to cart");
+}
+
+function cartCount(){
+  let cart = JSON.parse(localStorage.getItem("cartData")) || [];
+  count.innerText=cart.length;
+}
+cartCount();
+</script>
+
+</body>
+</html>

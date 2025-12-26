@@ -1,0 +1,27 @@
+<form action="post" onsubmit="return insertData(event)">
+    <input type="hidden" id="studentId">
+    Name : <input type="text" id="name">
+    Age : <input type="number" id="age">
+</form>
+<p id="res"></p><br>
+<div id="result"></div>
+
+<script>
+    var data =[{
+        name : 'Ram',
+        age : 19
+    },{
+        name : 'Raj',
+        age : 22
+    }];
+
+    function insertData(event){
+        e.preventDefault();
+        var name = document.querySelector('name').value;
+        var age = document.querySelector('age').value;
+        var obj ={
+            name : name,
+            age : age
+        }
+    }
+</script>

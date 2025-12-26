@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cart</title>
+<style>
+    /* ===== CART PAGE ===== */
+
+.cart-container{
+  max-width: 1000px;
+  margin: auto;
+  background: #fafafa;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Table */
+.cart-container table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.cart-container th{
+  background: #222;
+  color: #fff;
+  padding: 12px;
+}
+
+.cart-container td{
+  padding: 12px;
+  text-align: center;
+  background: #fff;
+}
+
+/* Product Image */
+.cart-container img{
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+/* Buttons */
+.cart-container button{
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cart-container .remove{
+  background: red;
+  color: white;
+}
+
+.cart-container .remove:hover{
+  background: darkred;
+}
+
+/* Total Section */
+.total-box{
+  margin-top: 20px;
+  text-align: right;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Empty Cart */
+.empty-cart{
+  text-align: center;
+  font-size: 20px;
+  color: #666;
+  margin-top: 50px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h2>My Store</h2>
+  <nav>
+    <a href="index.html">Products</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<div class="container">
+<table>
+<tr>
+<th>No</th><th>Image</th><th>Title</th>
+<th>Qty</th><th>Price</th><th>Total</th><th>Action</th>
+</tr>
+<tbody id="data"></tbody>
+</table>
+
+<h3>Total Amount: ₹ <span id="total">0</span></h3>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cartData")) || [];
+let sum=0, html="";
+
+cart.forEach((v,i)=>{
+  let t=v.qty*v.price;
+  sum+=t;
+  html+=`
+  <tr>
+    <td>${i+1}</td>
+    <td><img src="${v.image}" width="80"></td>
+    <td>${v.title.substring(0,30)}</td>
+    <td>${v.qty}</td>
+    <td>${v.price}</td>
+    <td>${t}</td>
+    <td><button class="remove" onclick="removeItem(${i})">X</button></td>
+  </tr>`;
+});
+
+data.innerHTML=html;
+total.innerText=sum;
+
+function removeItem(i){
+  cart.splice(i,1);
+  localStorage.setItem("cartData",JSON.stringify(cart));
+  location.reload();
+}
+</script>
+
+</body>
+</html>

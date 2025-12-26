@@ -1,0 +1,100 @@
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f4f4f4;
+    }
+
+    #img {
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 2px solid #555;
+    }
+
+    #quote {
+      font-size: 1.2rem;
+      font-style: italic;
+      margin: 20px auto;
+      max-width: 600px;
+    }
+
+    #name {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      background-color: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+
+<img id="img" src="" style="border-radius: 50%; height: 100px; width: 100px;">
+<h2 id="quote"></h2>
+<h3 id="name"></h3>
+
+<button onclick="return nextQuote()">Next</button>
+<button onclick="return preQuote()">Previous</button>
+
+<script>
+    var quote = [{
+        img: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/authors/1673611182i/3565._UX200_CR0,15,200,200_.jpg',
+        name: 'Oscar Wilde',
+        quote: 'Be yourself; everyone else is already taken.'
+    }, {
+        img: 'https://images.gr-assets.com/quotes/1511992603p2/8630.jpg',
+        name: 'Marilyn Monroe',
+        quote: `I'm selfish, impatient and a little insecure. I make mistakes, I am out of control and at times hard to handle. But if you can't handle me at my worst, then you sure as hell don't deserve me at my best`
+    },{
+        img: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/authors/1696236573i/22302._UX200_CR0,0,200,200_.jpg',
+        name: 'Frank Zappa',
+        quote: `So many books, so little time.`
+    },{
+        img: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/authors/1429114964i/9810._UX200_CR0,14,200,200_.jpg',
+        name: 'Albert Einstein',
+        quote: `Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.`
+    },{
+        img: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/authors/1197881416i/13755._UX200_CR0,47,200,200_.jpg',
+        name: 'Marcus Tullius Cicero',
+        quote: `A room without books is like a body without a soul.`
+    }];
+
+    var i = 0;
+    function nextQuote() {
+        if(i==quote.length){
+            i=0;
+        }
+        document.getElementById('img').src = quote[i].img;
+        document.getElementById('quote').innerHTML = quote[i].quote;
+        i++;
+    }
+
+    function preQuote() {
+
+        --i;
+
+        if (i < 0) {
+            i = quote.length - 1
+        }
+        document.getElementById('img').src = quote[i].img;
+        document.getElementById('quote').innerHTML = quote[i].quote;
+
+    }
+
+</script>

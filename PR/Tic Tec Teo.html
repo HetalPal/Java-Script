@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tec Teo</title>
+
+    <style>
+  
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #222;
+    }
+
+    h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #fff;
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 30px;
+    }
+
+    .game {
+        width: 540px;  
+        height: 540px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 30px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .box {
+        height: 160px;
+        width: 160px;
+        border-radius: 15px;
+        border: none;
+        font-size: 80px;
+        color: #333;
+        background: rgba(255,255,255,0.7);
+        box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .box:hover:not(:disabled) {
+        transform: scale(1.05);
+        background: rgba(255,255,255,0.9);
+        box-shadow: 0 0 15px rgba(255,255,255,0.6),
+                    0 0 25px rgba(255,255,255,0.4);
+    }
+
+    .box:disabled {
+        cursor: not-allowed;
+        opacity: 0.8;
+    }
+
+    #reset, #newbtn {
+        padding: 12px 32px;
+        font-size: 20px;
+        border-radius: 30px;
+        border: none;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: #fff;
+        cursor: pointer;
+        margin: 10px;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    #reset:hover, #newbtn:hover {
+        background: linear-gradient(135deg, #764ba2, #667eea);
+        transform: translateY(-3px);
+    }
+
+    .msg-container {
+        margin-bottom: 30px;
+        text-align: center;
+        padding: 20px;
+        border-radius: 20px;
+        background: rgba(255,255,255,0.3);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    #msg {
+        font-size: 32px;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 1px 1px 10px rgba(0,0,0,0.3);
+        margin-bottom: 15px;
+    }
+
+    .hide {
+        display: none;
+    }
+</style>
+
+
+</head>
+
+<body>
+    <div class="msg-container hide">
+        <p id="msg">Winner</p>
+        <button id="newbtn">New Game</button>
+    </div>
+
+    <h1>Tic Tec Teo</h1>
+    <div class="container">
+        <div class="game">
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+            <button class="box"></button>
+        </div>
+    </div>
+
+    <button id="reset">Reset Game</button>
+
+    <script>
+        let boxes = [...document.querySelectorAll('.box')];
+        let resetBtn = document.querySelector('#reset');
+        let turnO = true;
+        let newGameBtn = document.querySelector('#new-btn');
+        let msgContainer = document.querySelector('.msg-container');
+        let msg = document.querySelector('#msg');
+
+        var winPatterns = [
+            [0, 1, 2],
+            [0, 3, 6],
+            [0, 4, 8],
+            [1, 4, 7],
+            [2, 5, 8],
+            [2, 4, 6],
+            [3, 4, 5],
+            [6, 7, 8]
+        ];
+
+        boxes.forEach((box) =>{
+            box.addEventListener('click', function(){
+                if(turnO){
+                    box.innerText = 'O';
+                    box.style.color = 'green';
+                    turnO = false;
+                    box.disabled = true;
+                    checkWinner();
+                }else{
+                    box.innerText = 'X';
+                    box.style.color = 'black';
+                    turnO = true;
+                    box.disabled = true;
+                    checkWinner();
+                }
+            });
+        });
+
+        var enableBoxes = ()=>{
+            for(let box of boxes){
+                box.disabled = false;
+                box.innerText = "";
+            }
+        };
+
+        var disableBoxes = ()=>{
+            for(let box of boxes) {
+                box.disabled = true;
+            }
+        };
+
+        var showWinner = (winner)=>{
+            msg.innerText = `Congratulations, Winner is ${winner}`;
+            msgContainer.classList.remove('hide');
+            disableBoxes();
+        };
+
+        var checkWinner = ()=>{
+            let hasWin = false;
+            for(let pattern of winPatterns) {
+                let pos1Val = boxes[pattern[0]].innerText;
+                let pos2Val = boxes[pattern[1]].innerText;
+                let pos3Val = boxes[pattern[2]].innerText;
+
+                if(pos1Val !== "" && pos2Val !== "" && pos3Val !== ""
+                    && pos1Val === pos2Val && pos2Val === pos3Val){
+                    showWinner(pos1Val);
+                    hasWin = true;
+                    return;
+                }
+            }
+
+            if(!hasWin){
+                const allBoxes = [...boxes].every((box) => box.innerText !== "");
+                if (allBoxes){
+                    msgContainer.classList.remove('hide');
+                    msg.innerText = 'Match Drawn';
+                }
+            }
+        };
+
+        var resetGame = ()=>{
+            turnO = true;
+            enableBoxes();
+            msgContainer.classList.add('hide');
+        };
+
+        newGameBtn.addEventListener('click', resetGame);
+        resetBtn.addEventListener('click', resetGame);
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stuent Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        caption {
+            font-size: 1.5em;
+            margin: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="text"],
+        input[type="number"]{
+            width: 95%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] {
+            background-color: #954535;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #9E4638;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="col-6">
+            <caption>Student Deatils</caption>
+            <table border="1">
+                <tr>
+                    <td>Enter Your Name</td>
+                    <td><input type="text" id="name" placeholder="Your Name"></td>
+                </tr>
+                <tr>
+                    <td>Enter Your Standard</td>
+                    <td><input type="number" id="std" placeholder="Your Standard"></td>
+                </tr>
+                <tr></tr>
+                <tr></tr>
+                <tr>
+                    <td>Enter Your Maths Marks</td>
+                    <td><input type="number" id="maths" placeholder="Maths Marks"></td>
+                </tr>
+                <tr>
+                    <td>Enter Your English Marks</td>
+                    <td><input type="number" id="eng" placeholder="English Marks"></td>
+                </tr>
+                <tr>
+                    <td>Enter Your Science Marks</td>
+                    <td><input type="number" id="sci" placeholder="Science Marks"></td>
+                </tr>
+                <tr>
+                    <td>Enter Your Hindi Marks</td>
+                    <td><input type="number" id="hnd" placeholder="Hindi Marks"></td>
+                </tr>
+                <tr>
+                    <td>Enter Your Gujarati Marks</td>
+                    <td><input type="number" id="guj" placeholder="Gujarati Marks"></td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center;">
+                        <input type="submit" value="Show Result" onclick="return stdResult()">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-6" >
+            <caption>Student Result</caption>
+            <table border="1">
+                <tr>
+                    <td>Student Name</td>
+                    <td><input type="text" id="stdName"></td>
+                </tr>
+                 <tr>
+                    <td>Student Standard</td>
+                    <td><input type="number" id="standard"></td>
+                </tr>
+                 <tr>
+                    <td>Total of Marks (300)</td>
+                    <td><input type="number" id="total"></td>
+                </tr>
+                <tr>
+                    <td>Percentage</td>
+                    <td><input type="number" id="percentage"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function stdResult(){
+            var name = document.getElementById('name').value
+            var Standard = Number (document.getElementById('std').value)
+            var Maths = Number (document.getElementById('maths').value)
+            var English = Number (document.getElementById('eng').value)
+            var Science = Number (document.getElementById('sci').value)
+            var Hindi = Number (document.getElementById('hnd').value)
+            var Gujarati = Number (document.getElementById('guj').value)
+
+            document.getElementById('stdName').value = name
+            document.getElementById('standard').value = Standard
+
+            var total = Maths+English+Science+Hindi+Gujarati
+            document.getElementById('total').value=total
+
+            var percentage = (total*100)/300
+            document.getElementById('percentage').value=percentage
+        }
+    </script>
+</body>
+</html>
