@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Book</title>
+    <style>
+        body{
+            font-family: Arial;
+            background: #f2f2f2;
+            padding: 20px;
+            background-image: url("https://i.pinimg.com/736x/35/97/e1/3597e10f699803db89169fdba146ec39.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .container{
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+        }
+
+        form{
+            width: 300px;
+        }
+
+        #res{
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+
+        input,
+        textarea,
+        select,
+        button{
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 6px;
+        }
+
+        .card{
+            width: 250px;
+            padding: 10px;
+           color: #f2f2f2;
+        }
+
+        .card img{
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        button{
+            background: rgb(49, 42, 178);
+            color: white;
+            border: none;
+            padding: 6px;
+            border-radius: 5px;
+            font-size: 15px;
+            margin-right: 5px;
+        }
+
+        button:hover{
+            background-color: rgb(185, 242, 190);
+            color: rgb(143, 168, 243);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 style="color: #f2f2f2;">Recipe Book</h2>
+
+    <div class="container">
+
+        <form onsubmit="addData(event)">
+            <input type="hidden" id="editIndex">
+
+            Title:
+            <input type="text" id="title">
+
+            Ingredients:
+            <input type="text" id="ingredients">
+
+            Instruction:
+            <input type="text" id="instruction">
+
+            Image URL:
+            <input type="text" id="img">
+
+            Cuisine Type:
+            <select id="cuisine">
+                <option value="">--Select Cuisine--</option>
+                <option>Indian</option>
+                <option>Mexican</option>
+                <option>Chinese</option>
+                <option>Italian</option>
+                <option>Thai</option>
+            </select>
+
+            <button type="submit">Save Recipe</button>
+        </form>
+
+        <div id="res"></div>
+
+    </div>
+
+    <script>
+        var recipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+    function addData(e){
+        e.preventDefault();
+
+        var title = document.getElementById("title").value;
+        var ingredients = document.getElementById("ingredients").value;
+        var instruction = document.getElementById("instruction").value;
+        var cuisine = document.getElementById("cuisine").value;
+        var img = document.getElementById("img").value;
+        var editIndex = document.getElementById("editIndex").value;
+
+        if (title=="" || ingredients=="" || instruction=="" || cuisine=="" || img==""){
+            alert("All fields are required!");
+            return;
+        }
+
+        var recipe ={
+            title: title,
+            ingredients: ingredients,
+            instruction: instruction,
+            cuisine: cuisine,
+            img: img
+        };
+
+        if (editIndex === ""){
+            recipes.push(recipe);
+        } else {
+            recipes[editIndex] = recipe;
+            document.getElementById("editIndex").value = "";
+        }
+
+        localStorage.setItem("recipes", JSON.stringify(recipes));
+        clearForm();
+        displayRecipe();
+    }
+        function displayRecipe(){
+            var list = "";
+
+            recipes.forEach((v, i)=>{
+                list += `
+                <div class="card">
+                    <img src="${v.img}">
+                    <h3>${v.title}</h3>
+                    <p><b>Ingredients:</b> ${v.ingredients}</p>
+                    <p><b>Instruction:</b> ${v.instruction}</p>
+                    <p><b>Cuisine:</b> ${v.cuisine}</p>
+                    <button onclick="editRecipe(${i})">Edit</button>
+                    <button onclick="deleteRecipe(${i})">Delete</button>
+                </div>`;
+            });
+
+            res.innerHTML = list;
+        }
+
+        function editRecipe(i){
+            title.value = recipes[i].title;
+            ingredients.value = recipes[i].ingredients;
+            instruction.value = recipes[i].instruction;
+            cuisine.value = recipes[i].cuisine;
+            img.value = recipes[i].img;
+            editIndex.value = i;
+        }
+
+        function deleteRecipe(i){
+            recipes.splice(i, 1);
+            localStorage.setItem("recipes", JSON.stringify(recipes));
+            displayRecipe();
+        }
+
+        function clearForm(){
+            title.value = "";
+            ingredients.value = "";
+            instruction.value = "";
+            cuisine.value = "";
+            img.value = "";
+        }
+
+        displayRecipe();
+    </script>
+
+</body>
+
+</html>
