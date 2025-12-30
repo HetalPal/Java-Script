@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>University College Student</title>
+<style>
+body{
+    font-family: Arial;
+    background:#f2f2f2;
+}
+.container{
+    width:500px;
+    margin:30px auto;
+    background:white;
+    padding:20px;
+    border-radius:8px;
+}
+input,button{
+    width:100%;
+    padding:8px;
+    margin:6px 0;
+}
+button{
+    background:#4CAF50;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+#output{
+    margin-top:20px;
+    background:#eef;
+    padding:15px;
+    border-radius:6px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Student Details</h2>
+
+    <input id="uname" placeholder="University Name">
+    <input id="uyear" placeholder="University Year">
+
+    <input id="cname" placeholder="College Name">
+    <input id="clocation" placeholder="College Location">
+
+    <input id="sname" placeholder="Student Name">
+    <input id="sid" placeholder="Student ID">
+
+    <input id="cgpa1" placeholder="Year 1 CGPA">
+    <input id="cgpa2" placeholder="Year 2 CGPA">
+    <input id="cgpa3" placeholder="Year 3 CGPA">
+
+    <button onclick="showData()">Show Data</button>
+
+    <div id="output"></div>
+</div>
+
+<script>
+class University{
+    constructor(name, year){
+        this.name = name
+        this.year = year
+    }
+}
+
+class College extends University{
+    constructor(name, year, cname, location){
+        super(name, year)
+        this.cname = cname
+        this.location = location
+    }
+}
+
+class Student extends College{
+    constructor(name, year, cname, location, sname, id, c1, c2, c3){
+        super(name, year, cname, location)
+        this.sname = sname
+        this.id = id
+        this.c1 = c1
+        this.c2 = c2
+        this.c3 = c3
+    }
+
+    getData(){
+        return `
+        <h3>University</h3>
+        Name : ${this.name}<br>
+        Year : ${this.year}<br><br>
+
+        <h3>College</h3>
+        Name : ${this.cname}<br>
+        Location : ${this.location}<br><br>
+
+        <h3>Student</h3>
+        Name : ${this.sname}<br>
+        ID : ${this.id}<br>
+        Year 1 CGPA : ${this.c1}<br>
+        Year 2 CGPA : ${this.c2}<br>
+        Year 3 CGPA : ${this.c3}
+        `
+    }
+}
+
+function showData(){
+    let s = new Student(
+        uname.value,
+        uyear.value,
+        cname.value,
+        clocation.value,
+        sname.value,
+        sid.value,
+        cgpa1.value,
+        cgpa2.value,
+        cgpa3.value
+    )
+
+    output.innerHTML = s.getData()
+}
+</script>
+
+</body>
+</html>

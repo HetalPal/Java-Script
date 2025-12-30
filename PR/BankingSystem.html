@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Banking System</title>
+<style>
+body{
+    font-family:Arial;
+    background:#f2f2f2;
+}
+.box{
+    width:400px;
+    margin:30px auto;
+    background:#fff;
+    padding:20px;
+    border-radius:8px;
+}
+input,select,button{
+    width:100%;
+    padding:8px;
+    margin:6px 0;
+}
+button{
+    background:green;
+    color:white;
+    border:none;
+}
+.hide{
+    display:none;
+}
+#result{
+    margin-top:15px;
+    background:#eef;
+    padding:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+    <h2>Banking System</h2>
+
+    <select id="accountType" onchange="step1()">
+        <option value="">Select Account Type</option>
+        <option>Savings Account</option>
+        <option>Current Account</option>
+    </select>
+
+    <div id="userBox" class="hide">
+        <input id="name" placeholder="User Name">
+        <input id="accno" placeholder="Account Number">
+        <button onclick="step2()">Continue</button>
+    </div>
+
+    <div id="actionBox" class="hide">
+        <select id="action">
+            <option value="">Select Action</option>
+            <option>Deposit</option>
+            <option>Withdraw</option>
+            <option>Check Balance</option>
+        </select>
+
+        <input id="amount" placeholder="Enter Amount">
+        <button onclick="bank()">Submit</button>
+        <button onclick="resetAll()">Add New Data</button>
+    </div>
+
+    <div id="result"></div>
+</div>
+
+<script>
+let balance = 0
+
+function step1(){
+    if(accountType.value != ""){
+        userBox.classList.remove("hide")
+    }
+}
+
+function step2(){
+    if(name.value != "" && accno.value != ""){
+        actionBox.classList.remove("hide")
+    }
+}
+
+function deposit(a){
+    balance += a
+    return balance
+}
+
+function withdraw(a){
+    if(a <= balance){
+        balance -= a
+        return balance
+    }else{
+        return "Insufficient Balance"
+    }
+}
+
+function checkBalance(){
+    return balance
+}
+
+function bank(){
+    let r = ""
+    let a = Number(amount.value)
+
+    if(action.value == "Deposit"){
+        r = deposit(a)
+    }
+    if(action.value == "Withdraw"){
+        r = withdraw(a)
+    }
+    if(action.value == "Check Balance"){
+        r = checkBalance()
+    }
+
+    result.innerHTML =
+    "Name : " + name.value + "<br>" +
+    "Account No : " + accno.value + "<br>" +
+    "Account Type : " + accountType.value + "<br>" +
+    "Result : " + r
+}
+
+function resetAll(){
+    name.value = ""
+    accno.value = ""
+    amount.value = ""
+    action.value = ""
+    accountType.value = ""
+    userBox.classList.add("hide")
+    actionBox.classList.add("hide")
+    result.innerHTML = ""
+    balance = 0
+}
+</script>
+
+</body>
+</html>
