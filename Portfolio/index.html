@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hetal Pal | Portfolio</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0f172a;
+      color: #fff;
+    }
+
+    /* Navbar */
+    .navbar {
+      backdrop-filter: blur(10px);
+      background: rgba(0,0,0,0.6);
+    }
+
+    /* Hero */
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+    }
+
+    .hero h1 {
+      font-size: 60px;
+      font-weight: 700;
+    }
+
+    .hero span {
+      color: #38bdf8;
+    }
+
+    .btn-custom {
+      background: #38bdf8;
+      color: #000;
+      border-radius: 30px;
+      padding: 10px 25px;
+    }
+
+    .btn-custom:hover {
+      background: #0ea5e9;
+    }
+
+    /* Section */
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+      font-weight: 600;
+    }
+
+    /* Cards */
+    .card {
+      background: rgba(255,255,255,0.08);
+      border: none;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      transition: 0.4s;
+      color: #f1f5f9; /* ensure text is visible */
+    }
+
+    .card h5 {
+      color: #38bdf8;
+      font-weight: 600;
+    }
+
+    .card p {
+      color: #e2e8f0;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    /* Skills */
+    .skill-box {
+      padding: 20px;
+      border-radius: 15px;
+      background: rgba(255,255,255,0.05);
+      text-align: center;
+    }
+
+    /* Contact */
+    #contact .form-control {
+      background: rgba(255,255,255,0.08) !important;
+      border: 1px solid #38bdf8 !important;
+      color: #ffffff !important;
+    }
+
+    #contact .form-control:focus {
+      box-shadow: 0 0 10px #38bdf8;
+      border-color: #0ea5e9 !important;
+      background: rgba(255,255,255,0.12) !important;
+      color: #ffffff !important;
+    }
+
+    .form-control:focus {
+      box-shadow: 0 0 8px #38bdf8;
+      border-color: #0ea5e9 !important;
+    }
+
+    #contact .form-control::placeholder {
+      color: #cbd5f5;
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #020617;
+    }
+
+    /* Media Queries */
+    @media(max-width:768px){
+      .hero h1{
+        font-size:35px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">Hetal</a>
+
+    <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div>
+    <h1>Hi, I'm <span>Hetal Pal</span></h1>
+    <p class="lead">MERN Stack Developer | Creative Designer</p>
+    <a href="#projects" class="btn btn-custom mt-3">View My Work</a>
+  </div>
+</section>
+
+<!-- About -->
+<section class="container py-5" id="about">
+  <h2 class="section-title">About Me</h2>
+  <p class="text-center">I am a passionate BCA student and full stack developer who loves building modern, responsive and user-friendly websites. I focus on clean UI and real-world projects.</p>
+</section>
+
+<!-- Skills -->
+<section class="container py-5" id="skills">
+  <h2 class="section-title">Skills</h2>
+  <div class="row text-center">
+    <div class="col-md-3 mb-3"><div class="skill-box"><i class="fab fa-html5 fa-2x"></i><p>HTML</p></div></div>
+    <div class="col-md-3 mb-3"><div class="skill-box"><i class="fab fa-css3-alt fa-2x"></i><p>CSS</p></div></div>
+    <div class="col-md-3 mb-3"><div class="skill-box"><i class="fab fa-js fa-2x"></i><p>JavaScript</p></div></div>
+    <div class="col-md-3 mb-3"><div class="skill-box"><i class="fab fa-react fa-2x"></i><p>React</p></div></div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section class="container py-5" id="projects">
+  <h2 class="section-title">Projects</h2>
+  <div class="row">
+
+    <div class="col-md-4 mb-4">
+      <div class="card p-3">
+        <h5>Movie App</h5>
+        <p>React app with API integration.</p>
+      </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+      <div class="card p-3">
+        <h5>Recipe App</h5>
+        <p>CRUD application with modern UI.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="container py-5" id="contact">
+  <h2 class="section-title">Contact Me</h2>
+  <form class="w-50 mx-auto">
+    <input type="text" class="form-control mb-3" placeholder="Your Name">
+    <input type="email" class="form-control mb-3" placeholder="Your Email">
+    <textarea class="form-control mb-3" placeholder="Message"></textarea>
+    <button class="btn btn-custom w-100">Send Message</button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2026 Hetal Pal | All Rights Reserved</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
